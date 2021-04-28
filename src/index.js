@@ -3,21 +3,54 @@ import { render } from "react-dom";
 
 function App() {
     var [num, setNum] = useState(0);
-
+   
     function add() {
-        setNum(num + 1)
-    }
+        
+        setNum (num + 10) }
+
+     function sub(){   
+        setNum (num- 1)} 
+   
+
+     function multi(){   
+        setNum (num * 10)} 
+
+      function div (){
+          setNum (num / 5)
+      }  
+
+
+    
 
     return (
         <div>
             <h1>{num}</h1>
             <button
                 onClick={add}
-            >
-                Add one
+               
+                 >
+                Add (+)
             </button>
-        </div>
-    );
-}
+            
+            <button
+                onClick={sub }
+            >
+                sub (-)
+            </button>
+           
+            <button 
+                onClick={multi}
+                >
+                multi(*)
+           </button>
+          
+           <button 
+                onClick={div}
+                >
+                div(/)
+                    </button>   
 
+        </div>   
+    );
+    }
 render(<App />, document.getElementById("root"));
