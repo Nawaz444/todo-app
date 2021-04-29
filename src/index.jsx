@@ -1,58 +1,13 @@
-import React, { useState } from 'react';
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable object-shorthand */
+/* eslint-disable react/prop-types */
+/* eslint-disable prefer-destructuring */
+/* eslint-disable react/destructuring-assignment */
+import React from 'react';
 import { render } from 'react-dom';
 
-function App() { // functional component
-    const [num, setNum] = useState(0);
+class App extends React.Component {
 
-    function add() {
-        setNum(num + 10);
-    }
-
-    function sub() {
-        setNum(num - 1);
-    }
-
-    function multi() {
-        setNum(num * 10);
-    }
-
-    function div() {
-        setNum(num / 5);
-    }
-
-    return (
-        <div>
-            <h1>{num}</h1>
-            <button
-                type="button"
-                onClick={add}
-            >
-                Add (+)
-            </button>
-
-            <button
-                type="button"
-                onClick={sub}
-            >
-                sub (-)
-            </button>
-
-            <button
-                type="button"
-                onClick={multi}
-            >
-                multi(*)
-            </button>
-
-            <button
-                type="button"
-                onClick={div}
-            >
-                div(/)
-            </button>
-
-        </div>
-    );
 }
 
-render(<App />, document.getElementById('root'));
+render(<App name="fizan" />, document.getElementById('root'));
