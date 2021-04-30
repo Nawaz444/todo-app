@@ -26,6 +26,7 @@ add(){
         num: num + 1,
         name: name,
     });
+
 }
 sub(){
     const num =this.state.num;
