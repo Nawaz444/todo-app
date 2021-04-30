@@ -22,7 +22,7 @@ this.div = this.div.bind(this);
 add(){
     const num = this.state.num;
     const name = this.state.name;
-    this.setstate ({
+    this.setstate({
         num: num + 1,
         name: name,
     });
