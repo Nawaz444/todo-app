@@ -1,7 +1,10 @@
+/* eslint-disable react/sort-comp */
 /* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable prefer-destructuring */
 import React from 'react';
+
+import AddTodo from './AddTodos';
 
 // passing props between components
 class Todos extends React.Component {
@@ -23,6 +26,13 @@ class Todos extends React.Component {
             }],
         };
         this.onCompletedChange = this.onCompletedChange.bind(this);
+        this.addFunc = this.addFunc.bind(this);
+    }
+
+    addFunc(newTodo) {
+        const todos = this.state.todos;
+        todos.push(newTodo);
+        this.setState(todos);
     }
 
     onCompletedChange(index) {
@@ -37,26 +47,34 @@ class Todos extends React.Component {
 
     render() {
         const todos = this.state.todos;
-        const items = [];
-        for (let i = 0; i < todos.length; i += 1) {
-            items.push(
+        const items = todos.map((item, i) => {
+            let label = '';
+            if (item.completed) {
+                label = <strike>{item.name}</strike>;
+            } else {
+                label = item.name;
+            }
+            return (
                 <div key={i}>
                     <input
                         type="checkbox"
                         id={i}
-                        checked={todos[i].completed}
+                        checked={item.completed}
                         onChange={() => {
                             this.onCompletedChange(i);
                         }}
                     />
-                    <label htmlFor={i}>{todos[i].name}</label>
-                </div>,
+                    <label htmlFor={i}>
+                        {label}
+                    </label>
+                </div>
             );
-        }
+        });
 
         return (
             <div>
                 {items}
+                <AddTodo add={this.addFunc} />
             </div>
         );
     }
