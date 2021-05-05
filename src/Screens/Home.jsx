@@ -7,13 +7,19 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
+        this.onClick = this.onClick.bind(this);
+    }
+
+    onClick() {
+        const history = this.props.history;
+        history.push('/about');
     }
 
     render() {
         const location = this.props.location;
         const removedQuertion = location.search.slice(1);
         const parsed = qs.parse(removedQuertion);
-        return <h1>{parsed.company}</h1>;
+        return <h1 onClick={this.onClick}>{parsed.company}</h1>;
     }
 }
 
