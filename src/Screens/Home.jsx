@@ -1,26 +1,54 @@
-/* eslint-disable react/destructuring-assignment */
 /* eslint-disable prefer-destructuring */
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
-import qs from 'querystring';
+import { withRouter } from 'react-router-dom';
 
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
-        this.onClick = this.onClick.bind(this);
+        this.state = {
+            code: '',
+            title: '',
+        };
+        this.addNew = this.addNew.bind(this);
     }
 
-    onClick() {
+    addNew() {
+        const { finalArray, setFinalArray } = this.props;
+        const { code, title } = this.state;
+
+        finalArray.push({ code, title });
+        setFinalArray(finalArray);
+
         const history = this.props.history;
-        history.push('/about');
+        history.push(`/${finalArray.length - 1}`);
     }
 
     render() {
-        const location = this.props.location;
-        const removedQuertion = location.search.slice(1);
-        const parsed = qs.parse(removedQuertion);
-        return <h1 onClick={this.onClick}>{parsed.company}</h1>;
+        return (
+            <div>
+                <textarea
+                    placeholder="Enter Code"
+                    rows="10"
+                    cols="33"
+                    onChange={(event) => this.setState((prev) => ({
+                        code: event.target.value,
+                        title: prev.title,
+                    }))}
+                />
+                <input
+                    type="text"
+                    placeholder="Enter Title"
+                    onChange={(event) => this.setState((prev) => ({
+                        code: prev.code,
+                        title: event.target.value,
+                    }))}
+                />
+                <button type="button" onClick={this.addNew}>Create New Paste</button>
+            </div>
+        );
     }
 }
 
-export default Home;
+export default withRouter(Home);

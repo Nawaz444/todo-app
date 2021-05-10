@@ -1,45 +1,32 @@
 import React from 'react';
 import { render } from 'react-dom';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-} from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-// import Todos from './Screens/Todos';
 import Home from './Screens/Home';
-import About from './Screens/About';
+import Display from './Screens/Display';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            finalArray: [],
+        };
+        this.setFinalArray = this.setFinalArray.bind(this);
+    }
+
+    setFinalArray(arr) {
+        this.setState({ finalArray: arr });
     }
 
     render() {
+        const { finalArray } = this.state;
         return (
-            <Router>
-                <div>
-                    <nav>
-                        <ul>
-                            <li>
-                                <Link to="/">Home</Link>
-                            </li>
-                            <li>
-                                <Link to="/about">About</Link>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+            <BrowserRouter>
                 <Switch>
-                    <div>
-                        <h1>Nawaz</h1>
-                        <Route component={Home} path="/" exact />
-                        <Route component={About} path="/about" />
-                    </div>
+                    <Route path="/" exact component={() => <Home finalArray={finalArray} setFinalArray={this.setFinalArray} />} />
+                    <Route path="/:index" component={() => <Display finalArray={finalArray} setFinalArray={this.setFinalArray} />} />
                 </Switch>
-            </Router>
+            </BrowserRouter>
         );
     }
 }
